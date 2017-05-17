@@ -713,9 +713,9 @@ void test_detector_multi(char *datacfg, char *cfgfile, char *weightfile, char *i
       return;
     }
 
-    printf("before loop")
+    printf("before loop");
     while(fgets(input, 256, fp) != NULL){
-        print("%s", input)
+        printf("%s", input);
         image im = load_image_color(input,0,0);
         image sized = letterbox_image(im, net.w, net.h);
         //image sized = resize_image(im, net.w, net.h);
