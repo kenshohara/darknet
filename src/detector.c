@@ -742,6 +742,7 @@ void test_detector_multi(char *datacfg, char *cfgfile, char *weightfile, char *i
         char outdir[256];
         strcpy(outdir, outrootdir);
         strcat(outdir, outsubdir);
+        strcat(outdir, "/");
         mkdir(outdir, 0777);
 
         char name[256];
