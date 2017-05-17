@@ -7,7 +7,6 @@
 #define SECRET_NUM -1234
 #define TWO_PI 6.2831853071795864769252866
 
-void save_results(FILE *fp, int w, int h, int num, float thresh, box *boxes, float **probs, char **names, int classes);
 void extract_name_ext(char *path, char *dir, char *file);
 void extract_dir_file(char *path, char *dir, char *file);
 int *read_intlist(char *s, int *n, int d);

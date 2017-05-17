@@ -9,31 +9,6 @@
 
 #include "utils.h"
 
-void save_results(FILE *fp, int w, int h, int num, float thresh, box *boxes, float **probs, char **names, int classes)
-{
-    int i;
-    for(i = 0; i < num; ++i){
-        int class = max_index(probs[i], classes);
-        float prob = probs[i][class];
-        if(prob > thresh){
-            printf("%s: %.0f%%\n", names[class], prob*100);
-            box b = boxes[i];
-
-            int left  = (b.x-b.w/2.)*w;
-            int right = (b.x+b.w/2.)*w;
-            int top   = (b.y-b.h/2.)*h;
-            int bot   = (b.y+b.h/2.)*h;
-
-            if(left < 0) left = 0;
-            if(right > w-1) right = w-1;
-            if(top < 0) top = 0;
-            if(bot > h-1) bot = h-1;
-
-            fprintf(fp, "%s, %.0f%%, %d, %d, %d, %d\n", names[class], prob*100, left, top, right, bot)
-        }
-    }
-}
-
 void extract_name_ext(char *filename, char *name, char *ext)
 {
     const char *p = strrchr(filename, '.');
