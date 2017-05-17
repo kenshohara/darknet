@@ -736,12 +736,12 @@ void test_detector_multi(char *datacfg, char *cfgfile, char *weightfile, char *i
         if (nms) do_nms_obj(boxes, probs, l.w*l.h*l.n, l.classes, nms);
         //else if (nms) do_nms_sort(boxes, probs, l.w*l.h*l.n, l.classes, nms);
 
-        printf("...");
         char outsubdir[256];
         char filename[256];
         extract_dir_file(input, outsubdir, filename);
         char outdir[256];
         strcpy(outdir, outrootdir);
+        printf("%s\n", outdir);
         mkdir(outdir, 0777);
 
         char name[256];
@@ -759,6 +759,9 @@ void test_detector_multi(char *datacfg, char *cfgfile, char *weightfile, char *i
 
         strcat(outfilepath, result_ext);
         strcat(outimfilepath, result_im_ext);
+
+        printf("%s\n", outfilepath);
+        printf("%s\n", outimfilepath);
 
         draw_detections(im, l.w*l.h*l.n, thresh, boxes, probs, names, alphabet, l.classes);
         save_image(im, outimfilepath);
