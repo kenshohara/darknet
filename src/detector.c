@@ -708,8 +708,8 @@ void test_detector_multi(char *datacfg, char *cfgfile, char *weightfile, char *i
     float nms=.4;
 
     FILE *fp;
-    if ((fp = fopen(inputfile, "r") == NULL)){
-      printf("Error: inputfile open");
+    if ((fp = fopen(inputlist_file, "r") == NULL)){
+      printf("Error: inputlist_file open");
       return;
     }
 
