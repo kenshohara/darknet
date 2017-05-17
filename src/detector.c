@@ -708,14 +708,13 @@ void test_detector_multi(char *datacfg, char *cfgfile, char *weightfile, char *i
     float nms=.4;
 
     FILE *fp;
-    if ((fp = fopen(inputlist_file, "r") == NULL)){
-      printf("Error: inputlist file open");
+    if ((fp = fopen(inputfile, "r") == NULL)){
+      printf("Error: inputfile open");
       return;
     }
 
-    printf("before loop");
     while(fgets(input, 256, fp) != NULL){
-        printf("%s", input);
+        input[strlen(input) - 1] = '\0';
         image im = load_image_color(input,0,0);
         image sized = letterbox_image(im, net.w, net.h);
         //image sized = resize_image(im, net.w, net.h);
@@ -736,7 +735,7 @@ void test_detector_multi(char *datacfg, char *cfgfile, char *weightfile, char *i
         if (nms) do_nms_obj(boxes, probs, l.w*l.h*l.n, l.classes, nms);
         //else if (nms) do_nms_sort(boxes, probs, l.w*l.h*l.n, l.classes, nms);
 
-        print("...")
+        printf("...");
         char outsubdir[256];
         char filename[256];
         extract_dir_file(input, outsubdir, filename);
