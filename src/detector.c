@@ -707,9 +707,9 @@ void test_detector_multi(char *datacfg, char *cfgfile, char *weightfile, char *i
     int j;
     float nms=.4;
 
-    FILE *fp;
-    if ((fp = fopen(inputlist_file, "r") == NULL)){
-      printf("Error: inputlist_file open");
+    FILE *fp = fopen(inputlist_file, "r");
+    if (fp == NULL){
+      printf("Error: inputlist_file open\n");
       return;
     }
 
@@ -763,8 +763,8 @@ void test_detector_multi(char *datacfg, char *cfgfile, char *weightfile, char *i
         draw_detections(im, l.w*l.h*l.n, thresh, boxes, probs, names, alphabet, l.classes);
         save_image(im, outimfilepath);
 
-        FILE *out_fp;
-        if ((out_fp = fopen(outfilepath, "w") == NULL)){
+        FILE *out_fp = fopen(outfilepath, "w");
+        if (out_fp == NULL){
           printf("Error: outputfile open");
           return;
         }
