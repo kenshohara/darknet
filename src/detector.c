@@ -683,7 +683,7 @@ void save_results(FILE *fp, int w, int h, int num, float thresh, box *boxes, flo
             if(top < 0) top = 0;
             if(bot > h-1) bot = h-1;
 
-            fprintf(fp, "%s, %.0f%%, %d, %d, %d, %d\n", names[class], prob*100, left, top, right, bot)
+            fprintf(fp, "%s, %.0f%%, %d, %d, %d, %d\n", names[class], prob*100, left, top, right, bot);
         }
     }
 }
