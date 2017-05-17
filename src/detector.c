@@ -714,6 +714,7 @@ void test_detector_multi(char *datacfg, char *cfgfile, char *weightfile, char *i
     }
 
     while(fgets(input, 256, fp) != NULL){
+        printf("%s\n", input);
         input[strlen(input) - 1] = '\0';
         image im = load_image_color(input,0,0);
         image sized = letterbox_image(im, net.w, net.h);
@@ -730,7 +731,7 @@ void test_detector_multi(char *datacfg, char *cfgfile, char *weightfile, char *i
         float *X = sized.data;
         time=clock();
         network_predict(net, X);
-        printf("%s: Predicted in %f seconds.\n", input, sec(clock()-time));
+        printf("Predicted in %f seconds.\n", sec(clock()-time));
         get_region_boxes(l, im.w, im.h, net.w, net.h, thresh, probs, boxes, 0, 0, hier_thresh, 1);
         if (nms) do_nms_obj(boxes, probs, l.w*l.h*l.n, l.classes, nms);
         //else if (nms) do_nms_sort(boxes, probs, l.w*l.h*l.n, l.classes, nms);
