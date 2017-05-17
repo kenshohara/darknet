@@ -714,8 +714,8 @@ void test_detector_multi(char *datacfg, char *cfgfile, char *weightfile, char *i
     }
 
     while(fgets(input, 256, fp) != NULL){
-        printf("%s\n", input);
         input[strlen(input) - 1] = '\0';
+        printf("%s\n", input);
         image im = load_image_color(input,0,0);
         image sized = letterbox_image(im, net.w, net.h);
         //image sized = resize_image(im, net.w, net.h);
@@ -775,6 +775,8 @@ void test_detector_multi(char *datacfg, char *cfgfile, char *weightfile, char *i
         free_image(sized);
         free(boxes);
         free_ptrs((void **)probs, l.w*l.h*l.n);
+
+        printf("\n");
     }
 
     fclose(fp);
