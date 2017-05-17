@@ -427,7 +427,13 @@ int main(int argc, char **argv)
         char *outfile = find_char_arg(argc, argv, "-out", 0);
         int fullscreen = find_arg(argc, argv, "-fullscreen");
         test_detector("cfg/coco.data", argv[2], argv[3], filename, thresh, .5, outfile, fullscreen);
-    } else if (0 == strcmp(argv[1], "cifar")){
+    } else if (0 == strcmp(argv[1], "detect-multi")){
+        float thresh = find_float_arg(argc, argv, "-thresh", .24);
+        char *inputlist_file = (argc > 4) ? argv[4]: 0;
+        char *outdir = find_char_arg(argc, argv, "-out", 0);
+        int fullscreen = find_arg(argc, argv, "-fullscreen");
+        test_detector_multi("cfg/coco.data", argv[2], argv[3], inputlist_file, thresh, .5, outdir, fullscreen);
+    }  else if (0 == strcmp(argv[1], "cifar")){
         run_cifar(argc, argv);
     } else if (0 == strcmp(argv[1], "go")){
         run_go(argc, argv);

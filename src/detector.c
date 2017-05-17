@@ -663,7 +663,7 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *filenam
     }
 }
 
-void test_detector_multi(char *datacfg, char *cfgfile, char *weightfile, char *inputfile, float thresh, float hier_thresh, char *outrootdir, int fullscreen)
+void test_detector_multi(char *datacfg, char *cfgfile, char *weightfile, char *inputlist_file, float thresh, float hier_thresh, char *outrootdir, int fullscreen)
 {
     list *options = read_data_cfg(datacfg);
     char *name_list = option_find_str(options, "names", "data/names.list");
@@ -683,8 +683,8 @@ void test_detector_multi(char *datacfg, char *cfgfile, char *weightfile, char *i
     float nms=.4;
 
     FILE *fp;
-    if ((fp = fopen(inputfile, "r") == NULL)){
-      printf("Error: inputfile open");
+    if ((fp = fopen(inputlist_file, "r") == NULL)){
+      printf("Error: inputlist file open");
       return;
     }
 
