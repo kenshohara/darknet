@@ -765,7 +765,7 @@ void test_detector_multi(char *datacfg, char *cfgfile, char *weightfile, char *i
           printf("Error: outputfile open");
           return;
         }
-        save_results(out_fp, im.w, im.h, l.w*l.h*l.n, thresh, boxes, probs, names, image l.classes);
+        save_results(out_fp, im.w, im.h, l.w*l.h*l.n, thresh, boxes, probs, names, l.classes);
         fclose(out_fp);
 
         free_image(im);
