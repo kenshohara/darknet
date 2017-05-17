@@ -1,10 +1,10 @@
 This is a fork of [darknet](https://github.com/pjreddie/darknet), which adds a function for multiple inputs.  
 To use the function, execute the following command.
 ```
-./darknet detect-multi cfg/yolo.cfg yolo.weights inputs_list -out results
+./darknet detect-multi cfg/yolo.cfg yolo.weights inputs_list -out results/
 ```
 ```inputs_list``` is the file that includes file paths of inputs.  
-```-out results``` indicates the path of directory that stores the detection results.
+```-out results/``` indicates the path of directory that stores the detection results.
 
 ---
 

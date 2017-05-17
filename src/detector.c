@@ -741,6 +741,7 @@ void test_detector_multi(char *datacfg, char *cfgfile, char *weightfile, char *i
         extract_dir_file(input, outsubdir, filename);
         char outdir[256];
         strcpy(outdir, outrootdir);
+        strcat(outdir, outsubdir);
         printf("%s\n", outdir);
         mkdir(outdir, 0777);
 
