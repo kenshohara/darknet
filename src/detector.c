@@ -742,7 +742,6 @@ void test_detector_multi(char *datacfg, char *cfgfile, char *weightfile, char *i
         char outdir[256];
         strcpy(outdir, outrootdir);
         strcat(outdir, outsubdir);
-        printf("%s\n", outdir);
         mkdir(outdir, 0777);
 
         char name[256];
@@ -760,9 +759,6 @@ void test_detector_multi(char *datacfg, char *cfgfile, char *weightfile, char *i
 
         strcat(outfilepath, result_ext);
         strcat(outimfilepath, result_im_ext);
-
-        printf("%s\n", outfilepath);
-        printf("%s\n", outimfilepath);
 
         draw_detections(im, l.w*l.h*l.n, thresh, boxes, probs, names, alphabet, l.classes);
         save_image(im, outimfilepath);
