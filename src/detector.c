@@ -735,13 +735,12 @@ void test_detector_multi(char *datacfg, char *cfgfile, char *weightfile, char *i
         draw_detections(im, l.w*l.h*l.n, thresh, boxes, probs, names, alphabet, l.classes);
         save_image(im, outimfilepath);
 
-
         FILE *out_fp;
         if ((out_fp = fopen(outfilepath, "w") == NULL)){
           printf("Error: outputfile open");
           return;
         }
-        save_results(out_fp, im, l.w*l.h*l.n, thresh, boxes, probs, names, image l.classes);
+        save_results(out_fp, im.w, im.h, l.w*l.h*l.n, thresh, boxes, probs, names, image l.classes);
         fclose(out_fp);
 
         free_image(im);
