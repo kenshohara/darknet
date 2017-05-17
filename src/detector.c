@@ -713,7 +713,9 @@ void test_detector_multi(char *datacfg, char *cfgfile, char *weightfile, char *i
       return;
     }
 
+    printf("before loop")
     while(fgets(input, 256, fp) != NULL){
+        print("%s", input)
         image im = load_image_color(input,0,0);
         image sized = letterbox_image(im, net.w, net.h);
         //image sized = resize_image(im, net.w, net.h);
@@ -734,6 +736,7 @@ void test_detector_multi(char *datacfg, char *cfgfile, char *weightfile, char *i
         if (nms) do_nms_obj(boxes, probs, l.w*l.h*l.n, l.classes, nms);
         //else if (nms) do_nms_sort(boxes, probs, l.w*l.h*l.n, l.classes, nms);
 
+        print("...")
         char outsubdir[256];
         char filename[256];
         extract_dir_file(input, outsubdir, filename);
