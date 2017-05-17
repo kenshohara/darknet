@@ -9,6 +9,66 @@
 
 #include "utils.h"
 
+void save_results(FILE *fp, image im, int num, float thresh, box *boxes, float **probs, char **names, int classes)
+{
+    int i;
+    for(i = 0; i < num; ++i){
+        int class = max_index(probs[i], classes);
+        float prob = probs[i][class];
+        if(prob > thresh){
+            printf("%s: %.0f%%\n", names[class], prob*100);
+            box b = boxes[i];
+
+            int left  = (b.x-b.w/2.)*im.w;
+            int right = (b.x+b.w/2.)*im.w;
+            int top   = (b.y-b.h/2.)*im.h;
+            int bot   = (b.y+b.h/2.)*im.h;
+
+            if(left < 0) left = 0;
+            if(right > im.w-1) right = im.w-1;
+            if(top < 0) top = 0;
+            if(bot > im.h-1) bot = im.h-1;
+
+            fprintf(fp, "%s, %.0f%%, %d, %d, %d, %d\n", names[class], prob*100, left, top, right, bot)
+        }
+    }
+}
+
+void extract_name_ext(char *filename, char *name, char *ext)
+{
+    const char *p = strrchr(filename, '.');
+    if (p == NULL) {
+        *ext = '\0';
+        strcpy(name, filename);
+    } else if (p == filename) {
+        *name = '\0';
+        strcpy(ext, p + 1);
+    } else {
+        memcpy(name, filename, p - filename);
+        name[p - filename] = '\0';
+        strcpy(ext, p + 1);
+    }
+}
+
+void extract_dir_file(char *path, char *dir, char *file)
+{
+    const char *p = strrchr(path, '/');
+    if (p == NULL) {
+        *dir = '\0';
+        strcpy(file, path);
+    } else if (p == path) {
+        strcpy(dir, "/");
+        strcpy(file, p + 1);
+    } else {
+        memcpy(dir, path, p - path);
+        dir[p - path] = '\0';
+        strcpy(file, p + 1);
+
+        char tmp[256];
+        extract_dir_file(dir, tmp, dir);
+    }
+}
+
 int *read_intlist(char *gpu_list, int *ngpus, int d)
 {
     int *gpus = 0;
@@ -521,7 +581,7 @@ float mag_array(float *a, int n)
     int i;
     float sum = 0;
     for(i = 0; i < n; ++i){
-        sum += a[i]*a[i];   
+        sum += a[i]*a[i];
     }
     return sqrt(sum);
 }
@@ -607,7 +667,7 @@ float rand_normal()
 
 size_t rand_size_t()
 {
-    return  ((size_t)(rand()&0xff) << 56) | 
+    return  ((size_t)(rand()&0xff) << 56) |
             ((size_t)(rand()&0xff) << 48) |
             ((size_t)(rand()&0xff) << 40) |
             ((size_t)(rand()&0xff) << 32) |
@@ -645,4 +705,3 @@ float **one_hot_encode(float *a, int n, int k)
     }
     return t;
 }
-
